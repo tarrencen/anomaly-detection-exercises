@@ -252,3 +252,19 @@ def wrangle_curriculum_logs(df):
     df = df.dropna()
     return df
     
+def wrangle_grocery_customers(df):
+    '''
+    Takes in a dataframe of the grocery customers data,
+    returns a clean, wrangled version of the df.'''
+    # Change column names to lowercase
+    df.columns = [col.lower() for col in df.columns]
+
+    # Rename misspelled delicatessen column ("What is this delikhassen? Do they serve halal meats at this delikhassen?")
+    df = df.rename(columns= {'delicassen': 'deli'})
+
+    # Final cleaning: drop customer_id column, cast channel and region columns as dtype 'object'
+    df = df.drop(columns= ['customer_id'])
+    df.channel = df.channel.astype('object')
+    df.region = df.region.astype('object')
+    return df
+    
