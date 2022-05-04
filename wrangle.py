@@ -246,12 +246,12 @@ def wrangle_curriculum_logs(df):
     df.timestamp = pd.to_datetime(df.timestamp)
     # Set timestamp column as index
     df = df.set_index(df.timestamp)
-    #Cast cohort_id as dtype int64 (from float64)
-    df.cohort_id = df.cohort_id.astype('int64')
     # Drop unnecessary columns (now that 'timestamp' is set as index)
     df = df.drop(columns= ['date', 'time', 'timestamp'])
     # Drop nulls
     df = df.dropna()
+    #Cast cohort_id as dtype int64 (from float64)
+    df.cohort_id = df.cohort_id.astype('int64')
     return df
     
 def wrangle_grocery_customers(df):
